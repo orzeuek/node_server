@@ -1,0 +1,12 @@
+---
+
+### Examples:
+### ansible-playbook site.yml -i hosts --limit test #run only hosts from group [test:children]
+
+- hosts: node_server
+  become: True
+  user: vagrant
+  roles:
+    - node
+    - apache2
+    - git

@@ -1,0 +1,12 @@
+---
+
+  - name: get latest node-10 setup script
+    get_url:
+      url: http://deb.nodesource.com/setup_10.x
+      dest: /tmp/nodejs-setup
+
+  - name: run setup script
+    shell: /bin/bash /tmp/nodejs-setup
+
+  - name: install nodejs
+    apt: pkg=nodejs

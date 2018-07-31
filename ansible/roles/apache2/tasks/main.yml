@@ -1,0 +1,24 @@
+---
+  - name: install apache2
+    apt: pkg=apache2
+
+  - name: enabled mod_rewrite
+    apache2_module: name=rewrite state=present
+
+  - name: enabled mod_proxy
+    apache2_module: name=proxy state=present
+
+  - name: delete default apache2 site direcotry (/var/www/html)
+    shell: rm -rf /var/www/html
+
+  - name: disable default apache2 vhost
+    shell: a2dissite 000-default
+
+  - name: upload apache2 server.local site configuration
+    copy: src="../files/apache_site_available_root" dest=/etc/apache2/sites-available/server.conf
+
+  - name: enable server site
+    shell: a2ensite server
+
+  - name: restart apache
+    service: name=apache2 state=restarted
